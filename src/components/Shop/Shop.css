@@ -1,10 +1,9 @@
 .twin-container{
-  display:flex;
+    display: flex;
 }
 .product-container{
-  width: 60%;
-  margin-left: 20%;
-  margin-right: 5%;
-  border-right: 1px solid lightgray;
+    width: 70%;
+    margin-left: 20px;
+    margin-right: 5px;
+    border-right: 1px solid lightgray;
 }
-

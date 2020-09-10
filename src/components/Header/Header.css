@@ -1,7 +1,7 @@
 .header img{
-    height : 80px;
+    height: 80px;
 }
-.header {
+.header{
     text-align: center;
 }
 .header nav{
@@ -11,9 +11,9 @@
 }
 nav a{
     text-decoration: none;
-    color:white;
-    padding: 5px;
+    color: white;
     margin-right: 20px;
+    padding: 5px;
 }
 nav a:hover{
     background-color: gray;
