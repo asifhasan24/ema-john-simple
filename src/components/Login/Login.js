@@ -27,27 +27,22 @@ function Login() {
     const googleSignIn = () => {
         handleGoogleSignIn()
             .then(res => {
-                setUser(res)
-                setLoggedInUser(res)
-                history.replace(from);
+                handleResponse(res, true)
             })
     }
 
-    const signOut = () =>{
+    const signOut = () => {
         handleSignOut()
-        .then(res => {
-            setUser(res)
-            setLoggedInUser(res)
-        })
+            .then(res => {
+                handleResponse(res, false)
+            })
     }
 
-    const fbSignIn = () =>{
+    const fbSignIn = () => {
         handleFBSignIn()
-        .then(res => {
-            setUser(res)
-            setLoggedInUser(res)
-            history.replace(from);
-        })
+            .then(res => {
+                handleResponse(res, false)
+            })
     }
 
 
@@ -56,31 +51,34 @@ function Login() {
 
 
     const handleSubmit = (e) => {
-        
+
         if (newUser && user.email && user.password) {
-           creteUserWithEmailAndPassword(user.name,user.email,user.password)
-           .then (res =>{
-            setUser(res)
-            setLoggedInUser(res)
-            history.replace(from);  
-           })
+            creteUserWithEmailAndPassword(user.name, user.email, user.password)
+                .then(res => {
+                    handleResponse(res, true)
+                })
         }
 
         if (!newUser && user.email && user.password) {
-            signInWithEmailAndPassword(user.email,user.password)
-            .then (res =>{
-                setUser(res)
-                setLoggedInUser(res)
-                history.replace(from);  
-               })
+            signInWithEmailAndPassword(user.email, user.password)
+                .then(res => {
+                    handleResponse(res, true)
+                })
         }
         e.preventDefault()
 
     }
+    const handleResponse = (res, redirect) => {
+        setUser(res)
+        setLoggedInUser(res)
+        if (redirect) {
+            history.replace(from);
+        }
+    }
 
 
     const handleBlur = (e) => {
-      
+
         let isFieldValid = true;
         if (e.target.name === 'email') {
             isFieldValid = /\S+@\S+\.\S+/.test(e.target.value)
@@ -121,9 +119,7 @@ function Login() {
 
 
             <h1>Our own Authentication</h1>
-            {/* <p>Name : {user.name} </p>
-      <p>Email : {user.email} </p>
-      <p>Password : {user.password}</p> */}
+
 
             <form onSubmit={handleSubmit}>
                 <input type="checkbox" onChange={() => setNewUser(!newUser)} name="newUser" id="" />
